@@ -292,6 +292,13 @@ iframe {
   pointer-events: none;
 }
 
+.errors
+{
+    position:absolute;
+    color: transparent;
+    font-family: FontAwesome;
+}
+
 .focus-input100::before {
   content: "";
   display: block;
@@ -531,3 +538,4 @@ iframe {
     padding-right: 15px;
   }
 }
+

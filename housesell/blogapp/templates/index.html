@@ -39,23 +39,7 @@
 
          <div class="wrap-login100 p-l-50 p-r-50 p-t-72 p-b-50">
 
-            {% if form.errors %}
-    {% for field in form %}
-        {% for error in field.errors %}
-            <div class="alert alert-danger">
-                <strong>{{ error|escape }}</strong>
-            </div>
-        {% endfor %}
-    {% endfor %}
-    {% for error in form.non_field_errors %}
-            <div class="alert alert-danger">
-            <strong>{{ error|escape }}</strong>
-        </div>
-    {% endfor %}
-{% endif %}
-
-
-            <form method="POST" class="login100-form validate-form">
+            <form method="POST" class="login100-form validate-form" enctype="multipart/form-data">
                {% csrf_token %}
                <span class="login100-form-title p-b-59">
                   Sign Up
@@ -67,11 +51,21 @@
                   <span class="focus-input100"></span>
                </div>
 
+
+               {% if 'username' in errors.keys %}
+               <span style="color:red; position:relative;">{{errors.username}}</span>
+               {% endif %}
+
+
                <div class="wrap-input100 validate-input" >
                   <span class="label-input100">First Name</span>
                   {% render_field form.first_name class="input100" placeholder=form.first_name.label %}
                   <span class="focus-input100"></span>
                </div>
+
+               {% if 'first_name' in errors.keys %}
+               <span style="color:red; position:relative;">{{errors.first_name}}</span>
+               {% endif %}
 
                 <div class="wrap-input100 validate-input" >
                   <span class="label-input100">Last Name</span>
@@ -79,11 +73,19 @@
                   <span class="focus-input100"></span>
                </div>
 
+               {% if 'last_name' in errors.keys %}
+               <span style="color:red; position:relative;">{{errors.last_name}}</span>
+               {% endif %}
+
                <div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
                   <span class="label-input100">Email</span>
                   {% render_field form.email_id class="input100" placeholder="Email addess..." %}
                   <span class="focus-input100"></span>
                </div>
+
+               {% if 'email_id' in errors.keys %}
+               <span style="color:red; position:relative;">{{errors.email_id}}</span>
+               {% endif %}
 
                <div class="wrap-input100 validate-input" data-validate="Valid Phone number is required : xxxxxxxxxx" >
                   <span class="label-input100">Phone</span>
@@ -91,23 +93,35 @@
                   <span class="focus-input100"></span>
                </div>
 
+               {% if 'phone' in errors.keys %}
+               <span style="color:red; position:relative;">{{errors.phone}}</span>
+               {% endif %}
+
                <div class="wrap-input100 validate-input" data-validate = "Password is required">
                   <span class="label-input100">Password</span>
                   {% render_field form.password1 class="input100"  placeholder="*************" %}
                   <span class="focus-input100"></span>
                </div>
 
+
+
                <div class="wrap-input100 validate-input" data-validate = "Repeat Password is required">
                   <span class="label-input100">Repeat Password</span>
                   {% render_field form.password2 class="input100"  placeholder="*************" %}
                   <span class="focus-input100"></span>
                </div>
+               {% if 'password2' in errors.keys %}
+               <span style="color:red; position:relative;">{{errors.password2}}</span>
+               {% endif %}
 
                <div class="wrap-input100 validate-input" >
                   <span class="label-input100">Is_Seller</span>
                   {% render_field form.is_seller checked="True" %}
                   <span class="focus-input100"></span>
                </div>
+               {% if 'is_seller' in errors.keys %}
+               <span style="color:red; position:relative;">{{errors.is_seller}}</span>
+               {% endif %}
 
                <div class="wrap-input100 validate-input" >
                   <span class="label-input100">Description</span>
@@ -115,30 +129,23 @@
                   <span class="focus-input100"></span>
                </div>
 
+               {% if 'description' in errors.keys %}
+               <span style="color:red; position:relative;">{{errors.description}}</span>
+               {% endif %}
+
                <div class="wrap-input100 validate-input" >
                   <span class="label-input100">Profile Photo</span>
                   {% render_field form.photo class="input100"  %}
                   <span class="focus-input100"></span>
                </div>
 
+               {% if 'photo' in errors.keys %}
+               <span class="errors">{{errors.photo}}</span>
+               {% endif %}
 
 
 
-               <div class="flex-m w-full p-b-33">
-                  <div class="contact100-form-checkbox">
-                     <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
-                     <label class="label-checkbox100" for="ckb1">
-                        <span class="txt1">
-                           I agree to the
-                           <a href="#" class="txt2 hov1">
-                              Terms of User
-                           </a>
-                        </span>
-                     </label>
-                  </div>
 
-
-               </div>
 
                <div class="container-login100-form-btn">
                   <div class="wrap-login100-form-btn">

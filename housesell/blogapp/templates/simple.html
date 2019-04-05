@@ -5,6 +5,13 @@
     <title>Title</title>
 </head>
 <body>
-    {{form.as_p}}
+    inside the fun page
+     {% if messages %}
+        {% for messg in messages %}
+        <div class="alert alert-{{ message.tags }}">
+           {{ messg }}
+        </div>
+        {% endfor %}
+      {% endif %}
 </body>
 </html>

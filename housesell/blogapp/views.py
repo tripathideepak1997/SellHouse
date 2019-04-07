@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .forms import Registration
 from django.http import HttpResponse
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.views import View
 
 # Create your views here.
@@ -14,7 +15,6 @@ def fun(request):
 def register(request):
 
     if request.method == 'POST':
-        print('inside')
         registration_form = Registration(request.POST, request.FILES)
         if registration_form.is_valid():
             registration_form.save()
@@ -28,14 +28,17 @@ def register(request):
             # description = form.cleaned_data.get("description")
             # photo = form.cleaned_data.get("photo")
             messages.success(request, f'Account Created for {username} !')
-            return redirect('success_page')
+            return redirect('blogapp:success_page')
         else:
-            print("inside1")
-            #import pdb; pdb.set_trace()
-            print(registration_form.errors)
+
             errors = registration_form.errors
-            return render(request, 'index.html', {'form': Registration, 'errors': errors})
+            return render(request, 'register.html', {'form': Registration, 'errors': errors})
     else:
         form = Registration()
 
-    return render(request, 'index.html', {'form': Registration})
+    return render(request, 'register.html', {'form': Registration})
+
+
+@login_required
+def profile(request):
+    return render(request, 'profile.html')

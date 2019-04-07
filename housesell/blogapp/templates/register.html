@@ -1,11 +1,16 @@
-<!DOCTYPE html>
+{% extends 'base.html' %}
+
+
+
 <html lang="en">
+{% block content %}
 <head>
    {% load static %}
    {% load widget_tweaks %}
+   {% load crispy_forms_tags %}
    <title>Login V13</title>
    <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <meta name="viewport" content="width=100%, initial-scale=1">
 <!--===============================================================================================-->
    <link rel="icon" type="image/png" href="{% static 'images/icons/favicon.ico' %}"/>
 <!--===============================================================================================-->
@@ -31,6 +36,7 @@
    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
 <!--===============================================================================================-->
 </head>
+
 <body style="background-color: #999999;">
 
    <div class="limiter">
@@ -47,59 +53,48 @@
 
                <div class="wrap-input100 validate-input" data-validate="Username is required">
                   <span class="label-input100">UserName</span>
-                  {% render_field form.username class="input100" placeholder="Username" %}
+                  {{form.username|as_crispy_field}}
                   <span class="focus-input100"></span>
                </div>
 
 
-               {% if 'username' in errors.keys %}
-               <span style="color:red; position:relative;">{{errors.username}}</span>
-               {% endif %}
 
-
-               <div class="wrap-input100 validate-input" >
+               <div class="wrap-input100 " >
                   <span class="label-input100">First Name</span>
-                  {% render_field form.first_name class="input100" placeholder=form.first_name.label %}
+                  {{form.first_name|as_crispy_field}}
                   <span class="focus-input100"></span>
                </div>
 
-               {% if 'first_name' in errors.keys %}
-               <span style="color:red; position:relative;">{{errors.first_name}}</span>
-               {% endif %}
 
-                <div class="wrap-input100 validate-input" >
+
+                <div class="wrap-input100 " >
                   <span class="label-input100">Last Name</span>
-                  {% render_field form.last_name class="input100" placeholder="Last_Name" %}
+                  {{form.last_name|as_crispy_field}}
                   <span class="focus-input100"></span>
                </div>
 
-               {% if 'last_name' in errors.keys %}
-               <span style="color:red; position:relative;">{{errors.last_name}}</span>
-               {% endif %}
+
 
                <div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
                   <span class="label-input100">Email</span>
-                  {% render_field form.email_id class="input100" placeholder="Email addess..." %}
+                  {{form.email_id|as_crispy_field}}
                   <span class="focus-input100"></span>
                </div>
 
-               {% if 'email_id' in errors.keys %}
-               <span style="color:red; position:relative;">{{errors.email_id}}</span>
-               {% endif %}
 
-               <div class="wrap-input100 validate-input" data-validate="Valid Phone number is required : xxxxxxxxxx" >
-                  <span class="label-input100">Phone</span>
-                  {% render_field form.phone class="input100" placeholder="Phone" %}
-                  <span class="focus-input100"></span>
+               <div>
+               {{form.phone|as_crispy_field}}
+                   <small id="hint_id_username" class="form-text text-muted">
+                  {% if 'phone' in errors.keys %}
+                  <span style="color:red; position:relative;">{{errors.phone}}</span>
+                  {% endif %}
+                   </small>
                </div>
 
-               {% if 'phone' in errors.keys %}
-               <span style="color:red; position:relative;">{{errors.phone}}</span>
-               {% endif %}
 
                <div class="wrap-input100 validate-input" data-validate = "Password is required">
                   <span class="label-input100">Password</span>
-                  {% render_field form.password1 class="input100"  placeholder="*************" %}
+                  {{form.password1|as_crispy_field}}
                   <span class="focus-input100"></span>
                </div>
 
@@ -107,44 +102,29 @@
 
                <div class="wrap-input100 validate-input" data-validate = "Repeat Password is required">
                   <span class="label-input100">Repeat Password</span>
-                  {% render_field form.password2 class="input100"  placeholder="*************" %}
+                  {{form.password2|as_crispy_field}}
                   <span class="focus-input100"></span>
                </div>
-               {% if 'password2' in errors.keys %}
-               <span style="color:red; position:relative;">{{errors.password2}}</span>
-               {% endif %}
+
 
                <div class="wrap-input100 validate-input" >
                   <span class="label-input100">Is_Seller</span>
-                  {% render_field form.is_seller checked="True" %}
+                {{form.is_seller}}
                   <span class="focus-input100"></span>
                </div>
-               {% if 'is_seller' in errors.keys %}
-               <span style="color:red; position:relative;">{{errors.is_seller}}</span>
-               {% endif %}
 
-               <div class="wrap-input100 validate-input" >
+
+               <div class="wrap-input100 " >
                   <span class="label-input100">Description</span>
-                 {% render_field form.description class="input100" placeholder="Tell us about your self ..." %}
+                  {{form.description|as_crispy_field}}
                   <span class="focus-input100"></span>
                </div>
 
-               {% if 'description' in errors.keys %}
-               <span style="color:red; position:relative;">{{errors.description}}</span>
-               {% endif %}
-
-               <div class="wrap-input100 validate-input" >
+               <div class="wrap-input100 " >
                   <span class="label-input100">Profile Photo</span>
-                  {% render_field form.photo class="input100"  %}
+                  {{form.photo|as_crispy_field}}
                   <span class="focus-input100"></span>
                </div>
-
-               {% if 'photo' in errors.keys %}
-               <span class="errors">{{errors.photo}}</span>
-               {% endif %}
-
-
-
 
 
                <div class="container-login100-form-btn">
@@ -155,12 +135,14 @@
                      </button>
                   </div>
 
-                  <a href="#" class="dis-block txt3 hov1 p-r-30 p-t-10 p-b-10 p-l-30">
-                     Sign in
-                     <i class="fa fa-long-arrow-right m-l-5"></i>
-                  </a>
+
                </div>
             </form>
+            <a href="{% url 'blogapp:login' %}" class="dis-block txt3 hov1 p-r-30 p-t-10 p-b-10 p-l-30">
+                     Sign in
+               <i class="fa fa-long-arrow-right m-l-5"></i>
+
+            </a>
          </div>
       </div>
    </div>
@@ -184,3 +166,5 @@
 
 </body>
 </html>
+
+{% endblock %}

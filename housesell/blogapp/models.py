@@ -7,4 +7,4 @@ class User(AbstractUser):
     phone = models.PositiveIntegerField()
     is_seller = models.BooleanField(default=False)
     description = models.TextField(max_length=200, blank=True)
-    photo = models.ImageField(upload_to='media/images/', default='media/images/profile_default.png')
+    photo = models.ImageField(upload_to='images/', default='images/profile_default.png')

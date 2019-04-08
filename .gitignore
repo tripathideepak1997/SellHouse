@@ -1,2 +1,9 @@
 # Created by .ignore support plugin (hsz.mobi)
 /housesell/db.sqlite3
+.idea/HouseSell.iml
+.idea/codeStyles/
+.idea/dbnavigator.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/workspace.xml
+venv/

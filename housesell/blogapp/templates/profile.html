@@ -1,7 +1,30 @@
 {% extends 'base.html' %}
-
+{% load crispy_forms_tags %}
 {% block content %}
-<div>
-    <p>{{user}}</p>
+<div class="content-section">
+    <div class="media">
+        <img class="rounded-circle account-img" width="300px" height="400px" style="border-radius:50%;" src="{{user.photo.url}}" >
+        <div class="media-body">
+            <h2 class="account-heading">Username : {{user.username}}</h2>
+            {% if user.is_seller %}
+            <p class="text-secondary"  >Name     : {{user.first_name|add:user.last_name|default:'User'}} (Seller) </p>
+            {% else %}
+            <p class="text-secondary"  >Name     : {{user.first_name|add:user.last_name|default:'User'}} (Buyer) </p>
+            {% endif %}
+
+            <p class="text-secondary"  >Phone    : {{user.phone}}</p>
+
+            <p class="text-secondary"  >EmailID  : {{user.email_id}}</p>
+
+        </div>
+    </div>
+    <form method = "POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <legend class="border-bottom mb-4">Profile Info</legend>
+        {{ u_form | crispy }}
+        <div class="form-group">
+            <button class="btn btn-outline-info" type="submit">Update</button>
+        </div>
+    </form>
 </div>
 {% endblock %}

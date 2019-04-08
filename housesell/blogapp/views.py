@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect
-from .forms import Registration
+from .forms import Registration, UserUpdateProfile
 from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.views import View
+from django.views.generic import UpdateView
 
 # Create your views here.
 
@@ -41,4 +42,18 @@ def register(request):
 
 @login_required
 def profile(request):
-    return render(request, 'profile.html')
+    if request.method == "POST":
+        update_form = UserUpdateProfile(request.POST, request.FILES, instance=request.user)
+        print(update_form.errors)
+        if update_form.is_valid():
+            update_form.save()
+            messages.success(request, f'Account has been updated !')
+            return redirect('blogapp:profile')
+
+
+    else:
+        update_form = UserUpdateProfile(instance=request.user)
+    context = {'u_form': update_form}
+    return render(request, 'profile.html', context)
+
+

@@ -20,24 +20,16 @@ def register(request):
         if registration_form.is_valid():
             registration_form.save()
             username = registration_form.cleaned_data.get("username")
-            # first_name = form.cleaned_data.get("first_name")
-            # last_name = form.cleaned_data.get("last_name")
-            # email_id = form.cleaned_data.get("email_id")
-            # password1 = form.cleaned_data.get("password1")
-            # password2 = form.cleaned_data.get("password2")
-            # is_seller = form.cleaned_data.get("is_seller")
-            # description = form.cleaned_data.get("description")
-            # photo = form.cleaned_data.get("photo")
             messages.success(request, f'Account Created for {username} !')
-            return redirect('blogapp:success_page')
+            return redirect('home:base')
         else:
 
             errors = registration_form.errors
             return render(request, 'register.html', {'form': Registration, 'errors': errors})
     else:
-        form = Registration()
+        registration_form = Registration()
 
-    return render(request, 'register.html', {'form': Registration})
+    return render(request, 'register.html', {'form': registration_form})
 
 
 @login_required
@@ -49,8 +41,6 @@ def profile(request):
             update_form.save()
             messages.success(request, f'Account has been updated !')
             return redirect('blogapp:profile')
-
-
     else:
         update_form = UserUpdateProfile(instance=request.user)
     context = {'u_form': update_form}

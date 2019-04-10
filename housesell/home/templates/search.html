@@ -1,0 +1,28 @@
+
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+
+    <div class="filter-search">
+<div class="container">
+<form class="filter-form" method="POST" action="{% url 'home:search' %}" >
+{% csrf_token %}
+<input type="text" placeholder="Enter a street name, address number or keyword" name="search"
+       style="width:50%;height:50px;">
+<select style="width:10%;height:50px;" name="city">
+<option value="City">City</option>
+<option value="New Delhi"> New Delhi </option>
+<option value="Gurugram"> Gurugram </option>
+<option value="Chandigarh"> Chandigarh </option>
+</select>
+<select style="width:10%;height:50px;" name="state">
+<option value="State">State</option>
+<option value="Delhi"> Delhi </option>
+<option value="Haryana"> Haryana </option>
+<option value="Punjab"> Punjab </option>
+</select>
+    <button style="width:20%;height:50px;" class="site-btn fs-submit">SEARCH</button>
+</form>
+</div>
+</div>

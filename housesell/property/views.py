@@ -89,3 +89,5 @@ def property_interiors(request, id):
         errors = "You need to be seller to view the page or you are not requesting correctly"
 
     return render(request, 'property_interior.html', {'errors': errors})
+
+

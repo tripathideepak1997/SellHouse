@@ -1,9 +1,8 @@
 from django import forms
+from .models import Enquiry
 
-from property.models import Property
 
-
-class SearchForm(forms.ModelForm):
+class EnquiryForm(forms.ModelForm):
     class Meta:
-        model = Property
-        fields = ('property_title','property_city', 'property_states', )
+        model = Enquiry
+        fields = ('description', )

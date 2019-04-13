@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if property_all %}
+<div class="container text-center">
+  <h3>ALL Properties</h3><br>
+  <div class="row">
+      {% for prop in property_all %}
+    <div class="col-sm-4">
+      <img src="{{prop.photo_main.url}}" class="img-responsive" style="width:100%" alt="Image">
+      <p>{{prop.property_title}}</p>
+      <p>{{prop.property_price}}</p>
+        {% if user.is_authenticated and not user.is_seller %}
+
+           <a style="align:right;" href="{% url 'home:enquire' id=prop.id %}"> <input type="submit" value="Enquire Now"> </a>
+
+      {% endif %}
+    </div>
+
+
+     {% endfor %}
+
+
+  </div>
+</div>
+
+    {% if property_all.has_other_pages %}
+     <ul class="pagination">
+    {% if property_all.has_previous %}
+      <li><a href="?page={{ users.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in property_all.paginator.page_range %}
+      {% if property_all.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if property_all.has_next %}
+      <li><a href="?page={{ users.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+    </ul>
+    {% endif %}
+{% else %}
+    <h3>My Properties</h3>
+    <p>No properties found!!! :(</p>
+{% endif %}
+
+
+
+
+{% endblock %}

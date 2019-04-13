@@ -1,0 +1,28 @@
+{% extends 'profile.html' %}
+{% block profile %}
+
+<body>
+
+<h2>Title : {{property.property_title}}</h2><br>
+<p> Price :  {{property.property_price}}</p><br>
+<p> Bedrooms : {{property.property_bedroom}}</p><br>
+<p> Description: {{property.property_description}}</p><br>
+<p>
+<figure>
+  <img src="{{property.property_poster.photo.url}}" alt="Poster Photo" style=" height:20%;width:20%">
+  <figcaption>Owner: {{property.property_poster}}</figcaption>
+</figure>
+</p>
+<br>
+
+
+
+<figure>
+  <img src="{{property.photo_main.url}}" alt="Trulli" style="width:50%">
+  <figcaption>Fig.1 {{property.property_title}}</figcaption>
+</figure>
+
+</body>
+
+
+{% endblock %}

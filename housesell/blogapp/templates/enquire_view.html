@@ -1,0 +1,57 @@
+{% extends 'profile.html' %}
+{% block profile %}
+
+    {% if user.is_seller and user.is_authenticated %}
+    <h1>Enquiries Made for your properties</h1>
+    {% else %}
+    <h1>Enquiries Made By You </h1>
+    {% endif %}
+
+<head>
+<style>
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 5px;
+}
+th {
+  text-align: left;
+}
+</style>
+</head>
+
+<table style="width:100%">
+  <tr>
+    <th>S.No.</th>
+    {% if not user.is_seller %}
+    <th>Seller's UserName</th>
+   {% else %}
+       <th>Buyer's UserName</th>
+      {% endif %}
+
+      <th>Description</th>
+      <th>View Property</th>
+  </tr>
+
+    {% for prop in prop_user %}
+
+  <tr>
+    <td>{{ forloop.counter}}</td>
+    {% if not user.is_seller %}
+    <td>{{prop.0.property_poster}}</td>
+      {% else %}
+     <td>{{prop.1}}</td>
+      {% endif %}
+    <td>{{prop.2.description}}</td>
+      <td><a href="{% url 'blogapp:property_view' id=prop.0.id %}"><input type="submit" value="View Interiors"></a>
+</td>
+  </tr>
+
+
+    {% endfor %}
+
+</table>
+
+{% endblock %}

@@ -15,7 +15,7 @@ body {font-family: Arial, Helvetica, sans-serif;
 form {border: 3px solid #f1f1f1;}
 
 input[type=text], input[type=password] {
-  width: 100%;
+  width: 50%;
   padding: 12px 20px;
   margin: 8px 0;
   display: inline-block;
@@ -30,7 +30,7 @@ button {
   margin: 8px 0;
   border: none;
   cursor: pointer;
-  width: 100%;
+  width: 50%;
 }
 
 button:hover {
@@ -72,19 +72,33 @@ span.psw {
      width: 100%;
   }
 }
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 500px;
+  margin: auto;
+  text-align: center;
+  font-family: arial;
+}
 </style>
 </head>
-<body background="{% static 'images/bg.jpeg' %}" >
+<body background="{% static 'images/bg.jpeg' %}" style="background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;" >
 
-<h2>Login </h2>
 
+
+
+
+<div class="card">
+    <h2>Login </h2>
 <form method="POST" class="login100-form validate-form" enctype="multipart/form-data">
                {% csrf_token %}
   <div class="imgcontainer">
     <img class="rounded-circle account-img" width="200px" height="200px" style="border-radius:50%;" src="{% static 'images/profile_default.png' %}"  alt="Avatar" class="avatar">
   </div>
 
-  <div class="container">
     {{form|crispy}}
 
     <button type="submit">Login</button>
@@ -94,11 +108,10 @@ span.psw {
                      <i class="fa fa-long-arrow-right m-l-5"></i>
                   </a>
     </label>
-  </div>
 
 
 </form>
-
+</div>
 
 </body>
 </html>
